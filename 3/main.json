@@ -7,9 +7,31 @@
         },
         "storageAccountType":{
             "type": "string"
+        },
+
+        "vnetName":{
+            "type": "string"       
+        },
+        "vnetAddressPrefix":{
+            "type": "string"
+        },
+        "subnet1Name":{
+            "type": "string"       
+        },
+        "subnet1Prefix":{
+            "type": "string"
+        },
+        "subnet2Name":{
+            "type": "string"       
+        },
+        "subnet2Prefix":{
+            "type": "string"
+        },
+        "nsgName":{
+            "type": "string"       
         }
-      
     },
+
     "resources": [
     {
         "apiVersion": "2017-05-10",
@@ -25,6 +47,29 @@
             "parameters": {
                 "AccountName":{"value": "[parameters('storageAccountName')]"},
                 "AccountType":{"value": "[parameters('storageAccountType')]"}
+              }
+        }
+    },
+    {
+        "apiVersion": "2017-05-10",
+        "name": "vnet-deployment1",
+        "type": "Microsoft.Resources/deployments",
+        "comments": "This is link to VNET template",
+        "properties": {
+            "mode": "Incremental",
+            "templateLink": {
+                "uri":"https://raw.githubusercontent.com/jedisi/AzureTasks/master/3/vnet.json",
+                "contentVersion":"1.0.0.0"
+            },
+            "parameters": {
+                "vnetName":{"value": "[parameters('vnetName')]"},
+                "vnetAddressPrefix":{"value": "[parameters('vnetAddressPrefix')]"},
+                "subnet1Name":{"value": "[parameters('subnet1Name')]"},
+                "subnet1Prefix":{"value": "[parameters('subnet1Prefix')]"},
+                "subnet2Name":{"value": "[parameters('subnet2Name')]"},
+                "subnet2Prefix":{"value": "[parameters('subnet2Prefix')]"},
+                "nsgName":{"value": "[parameters('nsgName')]"}
+
               }
         }
     }
