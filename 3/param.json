@@ -2,11 +2,11 @@
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "SA-AccountName": {
-            "Value": "SAtask3"       
+        "SA-AccountName": { 
+            "value": "SAtask3"       
         },
         "SA-AccountType": {
-            "Value": "Standard_LRS"            
+            "value": "Standard_LRS"            
         }
     }
 }
