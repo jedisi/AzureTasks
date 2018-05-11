@@ -5,7 +5,7 @@
         "storageAccountName":{
             "type": "string"       
         },
-        "SA-AccountType":{
+        "storageAccountType":{
             "type": "string"
         }
     },
