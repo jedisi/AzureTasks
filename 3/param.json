@@ -3,11 +3,10 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "SA-AccountType":{
-            "defaultValue": "Standard_LRS",
-            "type": "string"
+            "Value": "Standard_LRS"            
         },
-        "SA-AccountName":{"defaultValue": "SAtask3",
-            "type": "string"       
+        "SA-AccountName":{
+            "defaultValue": "SAtask3"       
         }
    
     }
