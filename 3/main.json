@@ -38,6 +38,10 @@
             "templateLink": {
                 "uri":"https://raw.githubusercontent.com/jedisi/AzureTasks/master/3/sa.json",
                 "contentVersion":"1.0.0.0"
+            },
+            "parameterslink": {
+                "uri":"https://raw.githubusercontent.com/jedisi/AzureTasks/master/3/param.json",
+                "contentVersion":"1.0.0.0"
             }
         }
     }
