@@ -18,9 +18,6 @@
                 "uri":"https://raw.githubusercontent.com/jedisi/AzureTasks/master/3/sa.json",
                 "contentVersion":"1.0.0.0"
             },
-            "Parameters": {
-                "storageAccountName": "[parameters('storageAccountName')]"
-            },
             "ParametersLink": {
                 "uri":"https://raw.githubusercontent.com/jedisi/AzureTasks/master/3/param.json",
                 "contentVersion":"1.0.0.0"
