@@ -2,7 +2,7 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "SA-AccountType":{
+        "storageAccountType":{
             "type": "string"
         },
         "storageAccountName":{
@@ -23,7 +23,7 @@
             },
             "Parameters": {
                 "storageAccountName": "[parameters('storageAccountName')]",
-                "storageAccountType": "[parameters('SA-AccountType')]"
+                "storageAccountType": "[parameters('storageAccountType')]"
             },
             "ParametersLink": {
                 "uri":"https://raw.githubusercontent.com/jedisi/AzureTasks/master/3/param.json",

@@ -5,7 +5,7 @@
         "storageAccountName": { 
             "value": "SAtask3"       
         },
-        "SA-AccountType": {
+        "storageAccountType": {
             "value": "Standard_LRS"            
         }
     }
