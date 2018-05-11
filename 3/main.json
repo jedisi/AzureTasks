@@ -22,8 +22,8 @@
                 "contentVersion":"1.0.0.0"
             },
             "parameters": {
-                "storageAccountName":{"value": "[parameters('SA-AccountName')]"},
-                "storageAccountType":{"value": "[parameters('SA-AccountType')]"}
+                "storageAccountName": "[parameters('SA-AccountName')]",
+                "storageAccountType": "[parameters('SA-AccountType')]"
             }
         }
     }
