@@ -8,22 +8,25 @@
         "storageAccountType":{
             "type": "string"
         },
-        "VNET-Name":{
+        "vnetName":{
             "type": "string"       
         },
-        "VNET-IP":{
+        "vnetAddressPrefix":{
             "type": "string"       
         },
-        "VNET-SN1-Name":{
+        "subnet1Name":{
             "type": "string"       
         },
-        "VNET-SN1-IP":{
+        "subnet1Prefix":{
             "type": "string"       
         },
-        "VNET-SN2-Name":{
+        "subnet2Name":{
             "type": "string"       
         },
-        "VNET-SN2-IP":{
+        "subnet2Prefix":{
+            "type": "string"       
+        },
+        "nsgName":{
             "type": "string"       
         }
     },
@@ -44,7 +47,25 @@
                 "contentVersion":"1.0.0.0"
             }
         }
+    },
+    {
+        "apiVersion": "2017-05-10",
+        "name": "Vnet-Template",
+        "type": "Microsoft.Resources/deployments",
+        "comments": "This is link to VNET template with two subnets",
+        "properties": {
+            "mode": "Incremental",
+            "templateLink": {
+                "uri":"https://raw.githubusercontent.com/jedisi/AzureTasks/master/3/vnet.json",
+                "contentVersion":"1.0.0.0"
+            },
+            "parameterslink": {
+                "uri":"https://raw.githubusercontent.com/jedisi/AzureTasks/master/3/param.json",
+                "contentVersion":"1.0.0.0"
+            }
+        }
     }
+        
+    
 ]
-
 }

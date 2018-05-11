@@ -45,9 +45,6 @@
         }
       }
     },
-    "variables": {
-      "apiVersion": "2015-06-15"
-    },
     "resources": [
       {
         "apiVersion": "2015-06-15",
