@@ -10,7 +10,7 @@
         "properties": {
             "mode": "Incremental",
             "templateLink": {
-                "uri":"https://raw.githubusercontent.com/SayreX86/Azure/master/Module3/sa.json",
+                "uri":"https://github.com/jedisi/AzureTasks/blob/master/3/sa.json",
                 "contentVersion":"1.0.0.0"
             },
             "parameters": {
