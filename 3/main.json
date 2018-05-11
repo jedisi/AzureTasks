@@ -7,6 +7,24 @@
         },
         "storageAccountType":{
             "type": "string"
+        },
+        "VNET-Name":{
+            "type": "string"       
+        },
+        "VNET-IP":{
+            "type": "string"       
+        },
+        "VNET-SN1-Name":{
+            "type": "string"       
+        },
+        "VNET-SN1-IP":{
+            "type": "string"       
+        },
+        "VNET-SN2-Name":{
+            "type": "string"       
+        },
+        "VNET-SN2-IP":{
+            "type": "string"       
         }
     },
     "resources": [

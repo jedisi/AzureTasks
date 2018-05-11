@@ -7,6 +7,24 @@
         },
         "storageAccountType":{
             "value": "Standard_LRS"
+        },
+        "VNET-Name":{
+            "value": "VNET"
+        },
+        "VNET-IP":{
+            "value": "10.0.0.0/16"
+        },
+        "VNET-SN1-Name":{
+            "value": "VNET-SN1"
+        },
+        "VNET-SN1-IP":{
+            "value": "10.0.0.0/24"
+        },
+        "VNET-SN2-Name":{
+            "value": "VNET-SN2"
+        },
+        "VNET-SN2-IP":{
+            "value": "10.0.1.0/24"
         }
     }
 }
