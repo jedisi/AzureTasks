@@ -6,7 +6,7 @@
             "Value": "Standard_LRS"            
         },
         "SA-AccountName":{
-            "defaultValue": "SAtask3"       
+            "Value": "SAtask3"       
         }
    
     }
