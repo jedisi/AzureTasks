@@ -1,0 +1,88 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "SA-AccountType":{"defaultValue": "Standard_LRS",
+            "type": "string"
+        },
+        "SA-AccountName":{"defaultValue": "savmtraining",
+            "type": "string"       
+        },
+        "VNET-Name":{"defaultValue": "VNET",
+            "type": "string"       
+        },
+        "VNET-IP":{"defaultValue": "10.0.0.0/16",
+            "type": "string"       
+        },
+        "VNET-SN1-Name":{"defaultValue": "VNET-SN1",
+            "type": "string"       
+        },
+        "VNET-SN1-IP":{"defaultValue": "10.0.0.0/24",
+            "type": "string"       
+        },
+        "VNET-SN2-Name":{"defaultValue": "VNET-SN2",
+            "type": "string"       
+        },
+        "VNET-SN2-IP":{"defaultValue": "10.0.1.0/24",
+            "type": "string"       
+        },
+        "VM-Admin-Name":{"defaultValue": "NewSuperUser",
+            "type": "string"       
+        },
+        "VM-Admin-Password":{"defaultValue": "P@ssw0rd-epta",
+            "type": "securestring"       
+        },
+        "Windows-Version":{"defaultValue": "2016-Datacenter",
+            "type": "string"       
+        },
+        "DNS-Name":{"defaultValue": "",
+            "type": "string"       
+        },
+        "VM-NIC-Name":{"defaultValue": "VM-NIC",
+            "type": "string"       
+        },
+        "VM-PIP-Name":{"defaultValue": "VM-PIP",
+            "type": "string"       
+        },
+        "VM-Name":{"defaultValue": "VM",
+            "type": "string"       
+        },
+        "NSG-Name":{"defaultValue": "NSG",
+            "type": "string"       
+        },
+        "DSC-SasToken":{"defaultValue": "",
+            "type": "string"       
+        },
+        "DSC-PackagePath":{"defaultValue": "https://sascriptstraining.blob.core.windows.net/windows-powershell-dsc/MyDsc.ps1.zip",
+            "type": "string"       
+        },
+        "DSC-ScriptName":{"defaultValue": "MyDsc.ps1",
+            "type": "string"       
+        },
+        "DSC-ScriptFunction":{"defaultValue": "IISWebSite",
+            "type": "string"       
+        },
+        "AACC-Name":{"defaultValue": "AutomationAcc",
+            "type": "string"       
+        },
+        "CRED-Name":{"defaultValue": "AutoRunbook",
+            "type": "string"       
+        },
+        "User-Name":{"defaultValue": "automation@sayrexgstut.onmicrosoft.com",
+            "type": "string"       
+        },
+        "Password":{"defaultValue": "Qofu00172018",
+            "type": "securestring"       
+        },
+        "JOB-Id":{"defaultValue": "fccdd280-af83-409a-8f5c-fb791473487c",
+            "type": "string"       
+        },
+        "RUNBOOK-Name":{"defaultValue": "RUNBOOK",
+            "type": "string"       
+        },
+        "SCRIPT-URI":{"defaultValue": "https://sascriptstraining.blob.core.windows.net/runbooks/RUNBOOK.graphrunbook",
+            "type": "string"       
+        }
+    }
+
+}

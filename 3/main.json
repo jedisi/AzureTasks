@@ -1,0 +1,25 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "resources": [
+    {
+        "apiVersion": "2017-05-10",
+        "name": "SA-DEV1",
+        "type": "Microsoft.Resources/deployments",
+        "comments": "This is link to Storage Account template",
+        "properties": {
+            "mode": "Incremental",
+            "templateLink": {
+                "uri":"https://raw.githubusercontent.com/SayreX86/Azure/master/Module3/sa.json",
+                "contentVersion":"1.0.0.0"
+            },
+            "parameters": {
+                "storageAccountName":{"value": "[parameters('SA-AccountName')]"},
+                "storageAccountType":{"value": "[parameters('SA-AccountType')]"}
+            }
+        }
+    }
+]
+
+
+}
