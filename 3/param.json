@@ -4,9 +4,6 @@
     "parameters": {
         "storageAccountName": { 
             "value": "SAtask3"       
-        },
-        "storageAccountType": {
-            "value": "Standard_LRS"            
         }
     }
 }
