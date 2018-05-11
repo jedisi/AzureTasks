@@ -5,7 +5,7 @@
         "SA-AccountType":{
             "type": "string"
         },
-        "SA-AccountName":{
+        "storageAccountName":{
             "type": "string"       
         }
     },
@@ -21,10 +21,15 @@
                 "uri":"https://raw.githubusercontent.com/jedisi/AzureTasks/master/3/sa.json",
                 "contentVersion":"1.0.0.0"
             },
-            "parameters": {
-                "storageAccountName": "[parameters('SA-AccountName')]",
+            "Parameters": {
+                "storageAccountName": "[parameters('storageAccountName')]",
                 "storageAccountType": "[parameters('SA-AccountType')]"
+            },
+            "ParametersLink": {
+                "uri":"https://raw.githubusercontent.com/jedisi/AzureTasks/master/3/param.json",
+                "contentVersion":"1.0.0.0"
             }
+
         }
     }
 ]
