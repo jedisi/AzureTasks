@@ -2,7 +2,7 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-      "storageAccountType": {
+      "AccountType": {
         "type": "string",
         "defaultValue": "Standard_GRS",
         "allowedValues": [
@@ -15,18 +15,18 @@
           "description": "Storage Account type"
         }
       },
-      "storageAccountName": {
+      "AccountName": {
         "type": "string"    
       }
     },
     "resources": [
       {
         "type": "Microsoft.Storage/storageAccounts",
-        "name": "[parameters('storageAccountName')]",
+        "name": "[parameters('AccountName')]",
         "apiVersion": "2016-01-01",
         "location": "[resourceGroup().location]",
         "sku": {
-            "name": "[parameters('storageAccountType')]"
+            "name": "[parameters('AccountType')]"
         },
         "kind": "Storage", 
         "properties": {
@@ -34,9 +34,9 @@
       }
     ],
     "outputs": {
-        "storageAccountName": {
+        "AccountName": {
             "type": "string",
-            "value": "[parameters('storageAccountName')]"
+            "value": "[parameters('AccountName')]"
         }
     }
   }

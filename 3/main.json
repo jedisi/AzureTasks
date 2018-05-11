@@ -7,28 +7,8 @@
         },
         "storageAccountType":{
             "type": "string"
-        },
-        "vnetName":{
-            "type": "string"       
-        },
-        "vnetAddressPrefix":{
-            "type": "string"       
-        },
-        "subnet1Name":{
-            "type": "string"       
-        },
-        "subnet1Prefix":{
-            "type": "string"       
-        },
-        "subnet2Name":{
-            "type": "string"       
-        },
-        "subnet2Prefix":{
-            "type": "string"       
-        },
-        "nsgName":{
-            "type": "string"       
         }
+      
     },
     "resources": [
     {
@@ -42,27 +22,10 @@
                 "uri":"https://raw.githubusercontent.com/jedisi/AzureTasks/master/3/sa.json",
                 "contentVersion":"1.0.0.0"
             },
-            "parameterslink": {
-                "uri":"https://raw.githubusercontent.com/jedisi/AzureTasks/master/3/param.json",
-                "contentVersion":"1.0.0.0"
-            }
-        }
-    },
-    {
-        "apiVersion": "2017-05-10",
-        "name": "Vnet-Template",
-        "type": "Microsoft.Resources/deployments",
-        "comments": "This is link to VNET template with two subnets",
-        "properties": {
-            "mode": "Incremental",
-            "templateLink": {
-                "uri":"https://raw.githubusercontent.com/jedisi/AzureTasks/master/3/vnet.json",
-                "contentVersion":"1.0.0.0"
-            },
-            "parameterslink": {
-                "uri":"https://raw.githubusercontent.com/jedisi/AzureTasks/master/3/param.json",
-                "contentVersion":"1.0.0.0"
-            }
+            "parameters": {
+                "AccountName":{"value": "[parameters('storageAccountName')]"},
+                "AccountType":{"value": "[parameters('storageAccountType')]"}
+              }
         }
     }
         
