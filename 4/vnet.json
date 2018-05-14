@@ -1,0 +1,122 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "vnetName": {
+        "type": "string",
+        "metadata": {
+          "description": "VNet name"
+        }
+      },
+      "vnetAddressPrefix": {
+        "type": "string",
+        "metadata": {
+          "description": "Address prefix"
+        }
+      },
+      "subnet1Prefix": {
+        "type": "string",
+        "metadata": {
+          "description": "Subnet 1 Prefix"
+        }
+      },
+      "subnet1Name": {
+        "type": "string",
+        "metadata": {
+          "description": "Subnet 1 Name"
+        }
+      },
+      "subnet2Prefix": {
+        "type": "string",
+        "metadata": {
+          "description": "Subnet 2 Prefix"
+        }
+      },
+      "subnet2Name": {
+        "type": "string",
+        "metadata": {
+          "description": "Subnet 2 Name"
+        }
+      },
+      "nsgName":{
+        "type": "string",
+        "metadata": {
+          "description": "Network Security Group Name"
+        }
+      }
+    },
+    "resources": [
+      {
+        "apiVersion": "2015-05-01-preview",
+        "type": "Microsoft.Network/networkSecurityGroups",
+        "name": "[parameters('nsgName')]",
+        "location": "[resourceGroup().location]",
+        "properties": {
+            "securityRules": [
+            {
+                "name": "rdp_rule",
+                "properties": {
+                "description": "Allow RDP",
+                "protocol": "Tcp",
+                "sourcePortRange": "*",
+                "destinationPortRange": "3389",
+                "sourceAddressPrefix": "Internet",
+                "destinationAddressPrefix": "*",
+                "access": "Allow",
+                "priority": 100,
+                "direction": "Inbound"
+                }
+            },
+            {
+                "name": "web_rule",
+                "properties": {
+                "description": "Allow WEB",
+                "protocol": "Tcp",
+                "sourcePortRange": "*",
+                "destinationPortRange": "80",
+                "sourceAddressPrefix": "Internet",
+                "destinationAddressPrefix": "*",
+                "access": "Allow",
+                "priority": 101,
+                "direction": "Inbound"
+                }
+            }
+            ]
+        }
+      },
+      {
+        "apiVersion": "2015-06-15",
+        "type": "Microsoft.Network/virtualNetworks",
+        "name": "[parameters('vnetName')]",
+        "location": "[resourceGroup().location]",
+
+        "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+              "[parameters('vnetAddressPrefix')]"
+            ]
+          },
+          "subnets": [
+            {
+              "name": "[parameters('subnet1Name')]",
+              "dependsOn": [
+                "[concat('Microsoft.Network/networkSecurityGroups/', parameters('nsgName'))]"
+              ],
+              "properties": {
+                "addressPrefix": "[parameters('subnet1Prefix')]",
+                "networkSecurityGroup": {
+                  "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgName'))]"
+                  }
+              }
+            },
+            {
+              "name": "[parameters('subnet2Name')]",
+              "properties": {
+                "addressPrefix": "[parameters('subnet2Prefix')]"
+              }
+            }
+          ]
+      }
+    }
+  ]
+}
