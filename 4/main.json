@@ -29,13 +29,67 @@
         },
         "nsgName":{
             "type": "string"       
-        }
+        },
+        "adminUsername":{
+            "type": "string"
+        },
+         "adminPassword":{
+            "type": "securestring"
+         },
+         "windowsOSVersion":{
+            "type": "string"
+         },
+         "dnsLabelPrefix":{
+            "type": "string"
+         },
+         "nicName":{
+            "type": "string"
+         },
+         "publicIPAddressName":{
+            "type": "string"              
+         },
+         "vmName":{
+            "type": "string"
+         },
+         "DSCPackageSasToken":{
+            "type": "string"
+         },
+         "DSCPackagePath":{
+            "type": "string"
+         },
+         "DSCScriptName":{
+            "type": "string"
+         },
+         "DSCScriptFunction":{
+            "type": "string"
+         },
+         "accountName":{
+            "type": "string"
+         },
+         "credentialName":{
+            "type": "string"
+         },
+         "userName":{
+            "type": "string"
+         },
+         "password":{
+            "type": "string"
+         },
+         "jobId":{
+            "type": "string"
+         },
+         "runbookName":{
+            "type": "string"
+         },
+         "scriptUri":{
+            "type": "string"
+         }
     },
 
     "resources": [
     {
         "apiVersion": "2017-05-10",
-        "name": "SA-DEV1",
+        "name": "SA-deployment",
         "type": "Microsoft.Resources/deployments",
         "comments": "This is link to Storage Account template",
         "properties": {
@@ -72,8 +126,84 @@
 
               }
         }
+    },
+
+    {
+        "apiVersion": "2017-05-10",
+        "name": "VM-Template",
+        "type": "Microsoft.Resources/deployments",
+        "comments": "This is link to Virtual Machine template",
+        "properties": {
+            "mode": "Incremental",
+            "templateLink": {
+                "uri":"https://raw.githubusercontent.com/SayreX86/Azure/master/Module3/vm.json",
+                "contentVersion":"1.0.0.0"
+            },
+            "parameters": {
+                "adminUsername":{"value": "[parameters('adminUsername')]"},
+                "adminPassword":{"value": "[parameters('adminPassword')]"},
+                "dnsLabelPrefix":{"value": "[parameters('dnsLabelPrefix')]"},
+                "windowsOSVersion":{"value": "[parameters('windowsOSVersion')]"},
+                "storageAccountName":{"value": "[parameters('storageAccountName')]"},
+                "nicName":{"value": "[parameters('nicName')]"},
+                "publicIPAddressName":{"value": "[parameters('publicIPAddressName')]"},
+                "vmName":{"value": "[parameters('vmName')]"},
+                "addressPrefix":{"value": "[parameters('vnetAddressPrefix')]"},
+                "subnetName":{"value": "[parameters('subnet1Name')]"},
+                "subnetPrefix":{"value": "[parameters('subnet1Prefix')]"},
+                "virtualNetworkName":{"value": "[parameters('vnetName')]"},
+                "DSCPackageSasToken":{"value": "[parameters('DSCPackageSasToken')]"},
+                "DSCScriptName":{"value": "[parameters('DSCScriptName')]"},
+                "DSCScriptFunction":{"value": "[parameters('DSCScriptFunction')]"},
+                "DSCPackagePath":{"value": "[parameters('DSCPackagePath')]"}
+            }
+        },
+        "dependsOn": [
+            "vnet-deployment1",
+            "SA-deployment"
+        ]
+    },
+    {
+        "apiVersion": "2017-05-10",
+        "name": "NSG-Template",
+        "type": "Microsoft.Resources/deployments",
+        "comments": "This is link to NSG template",
+        "properties": {
+            "mode": "Incremental",
+            "templateLink": {
+                "uri":"https://raw.githubusercontent.com/SayreX86/Azure/master/Module4/nsg.json",
+                "contentVersion":"1.0.0.0"
+            },
+            "parameters": {
+                "nsgName":{"value": "[parameters('nsgName')]"}
+            }
+        }
+    },
+    {
+        "apiVersion": "2017-05-10",
+        "name": "Runbook-Template",
+        "type": "Microsoft.Resources/deployments",
+        "comments": "This is link to Runbook template",
+        "properties": {
+            "mode": "Incremental",
+            "templateLink": {
+                "uri":"https://raw.githubusercontent.com/SayreX86/Azure/master/Module5/aacc.json",
+                "contentVersion":"1.0.0.0"
+            },
+            "parameters": {
+                "accountName":{"value": "[parameters('accountName')]"},
+                "credentialName":{"value": "[parameters('credentialName')]"},
+                "userName":{"value": "[parameters('userName')]"},
+                "password":{"value": "[parameters('password')]"},
+                "jobId":{"value": "[parameters('jobId')]"},
+                "runbookName":{"value": "[parameters('runbookName')]"},
+                "scriptUri":{"value": "[parameters('scriptUri')]"}
+            }
+        },
+        "dependsOn": [
+            "VM-Template"
+        ]
     }
-        
-    
-]
+
+    ]
 }

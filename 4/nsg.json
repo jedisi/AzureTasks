@@ -1,0 +1,50 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "nsgName":{
+      "type": "string"
+    }
+  },
+  "variables": {},
+  "resources": [
+  {
+  "apiVersion": "2017-06-01",
+  "type": "Microsoft.Network/networkSecurityGroups",
+  "name": "[parameters('nsgName')]",
+  "location": "[resourceGroup().location]",
+  "properties": {
+    "securityRules": [
+      {
+        "name": "Allow8080",
+        "properties": {
+          "description": "Allow Port 8080",
+          "protocol": "Tcp",
+          "sourcePortRange": "*",
+          "destinationPortRange": "8080",
+          "sourceAddressPrefix": "*",
+          "destinationAddressPrefix": "VirtualNetwork",
+          "access": "Allow",
+          "priority": 100,
+          "direction": "Inbound"
+        }
+      },
+      {
+        "name": "Allow3389",
+        "properties": {
+          "description": "Allow Port 3389",
+          "protocol": "Tcp",
+          "sourcePortRange": "*",
+          "destinationPortRange": "3389",
+          "sourceAddressPrefix": "*",
+          "destinationAddressPrefix": "VirtualNetwork",
+          "access": "Allow",
+          "priority": 101,
+          "direction": "Inbound"
+        }
+      }
+    ]
+  }
+  }
+  ]
+}

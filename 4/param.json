@@ -28,6 +28,73 @@
         },
         "nsgName":{
             "value": "NSG"
+        },
+       "adminUsername":{
+           "value": "NewSuperUser"
+       },
+        "adminPassword":{
+            "value": "P@ssw0rd-epta"
+        },
+        "windowsOSVersion":{
+            "value": "2016-Datacenter"
+        },
+        "dnsLabelPrefix":{
+            "value": ""
+        },
+        "nicName":{
+            "value": "VM-NIC"
+        },
+        "publicIPAddressName":{
+            "value": "VM-PIP"               
+        },
+        "vmName":{
+            "value": "VM"
+        },
+        "DSCPackageSasToken":{
+            "value": ""
+        },
+        "DSCPackagePath":{
+            "value": "https://sascriptstraining.blob.core.windows.net/windows-powershell-dsc/MyDsc.ps1.zip"
+        },
+        "DSCScriptName":{
+            "value": "MyDsc.ps1"
+        },
+        "DSCScriptFunction":{
+            "value": "IISWebSite"
+        },
+        "accountName":{
+            "value": "AutomationAcc"
+        },
+        "credentialName":{
+            "defaultvalue": "AutoRunbook"
+        },
+        "userName":{
+            "value": "automation@sayrexgstut.onmicrosoft.com"
+        },
+        "password":{
+            "value": "Qofu00172018"
+        },
+        "jobId":{
+            "value": "fccdd280-af83-409a-8f5c-fb791473487c"
+        },
+        "runbookName":{
+            "value": "RUNBOOK"
+        },
+        "scriptUri":{
+            "value": "https://sascriptstraining.blob.core.windows.net/runbooks/RUNBOOK.graphrunbook"
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
