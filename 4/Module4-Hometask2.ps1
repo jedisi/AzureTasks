@@ -2,8 +2,8 @@ $RG = 'RG'
 $RG2 = 'RG2'
 $StorageName = 'sascriptstraining'
 $Location = 'westeurope'
-$DSCConfigPath = 'https://raw.githubusercontent.com/SayreX86/Azure/master/Module4/MyDsc.ps1'
-$TempDSCCOnfigPath = "$env:TEMP\MyDsc.ps1"
+$DSCConfigPath = 'https://raw.githubusercontent.com/jedisi/AzureTasks/master/4/MyDsc.ps1'
+$TempDSCCOnfigPath = "C:\Users\Aliaksandr_Simanau\Desktop\Azure\Git\AzureTasks\4\MyDsc.ps1"
 $vmname = 'vmnametraining'
 
 #Check for DSC resources and install if it needs
@@ -37,9 +37,16 @@ $DSCSAS = New-AzureStorageBlobSASToken -Container 'windows-powershell-dsc' -Blob
 
 #Provide SAS token during deployment
 New-AzureRmResourceGroup -Name $RG -Location westeurope -Force -Verbose
+
 New-AzureRmResourceGroupDeployment -ResourceGroupName $RG `
--TemplateUri 'https://raw.githubusercontent.com/SayreX86/Azure/master/Module3/main.json' `
--DSC-SasToken $DSCSAS -DNS-Name $vmname -Verbose
+                                   -TemplateUri "https://raw.githubusercontent.com/jedisi/AzureTasks/master/4/main.json" `
+                                   -TemplateParameterUri "https://raw.githubusercontent.com/jedisi/AzureTasks/master/4/param.json" 
+
+
+
+New-AzureRmResourceGroupDeployment -ResourceGroupName $RG `
+-TemplateUri 'https://raw.githubusercontent.com/jedisi/AzureTasks/master/4/main.json' 
+-DNS-Name $vmname -Verbose
 
 #Check 8080 port access
 $IE=new-object -com internetexplorer.application

@@ -27,7 +27,7 @@
             "value": "10.0.1.0/24"
         },
         "nsgName":{
-            "value": "NSG"
+            "value": "NSG2"
         },
        "adminUsername":{
            "value": "NewSuperUser"
