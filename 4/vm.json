@@ -1,0 +1,252 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "adminUsername": {
+        "type": "string",
+        "metadata": {
+          "description": "Username for the Virtual Machine."
+        }
+      },
+      "adminPassword": {
+        "type": "securestring",
+        "metadata": {
+          "description": "Password for the Virtual Machine."
+        }
+      },
+      "dnsLabelPrefix": {
+        "type": "string",
+        "metadata": {
+          "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
+        }
+      },
+      "windowsOSVersion": {
+        "type": "string",
+        "defaultValue": "2016-Datacenter",
+        "metadata": {
+          "description": "The Windows version for the VM."
+        }
+      },
+      "nicName": {
+        "type": "string",
+        "metadata": {
+          "description": ""
+        }
+      },
+      "publicIPAddressName":{
+        "type": "string",
+        "metadata": {
+          "description": ""
+        }
+      },
+      "vmName":{
+        "type": "string",
+        "metadata": {
+          "description": ""
+        }
+      },
+      "addressPrefix":{
+        "type": "string",
+        "metadata": {
+          "description": ""
+        }
+      },
+      "subnetName":{
+        "type": "string",
+        "metadata": {
+          "description": ""
+        }
+      },
+      "subnetPrefix":{
+        "type": "string",
+        "metadata": {
+          "description": ""
+        }
+      },
+      "virtualNetworkName":{
+        "type": "string",
+        "metadata": {
+          "description": ""
+        }
+      },
+      "storageAccountName":{
+        "type": "string",
+        "metadata": {
+          "description": ""
+        }
+      },
+      "DSCPackageSasToken":{
+        "type": "string",
+        "metadata": {
+          "description": ""
+        }
+      },
+      "DSCPackagePath":{
+        "type": "string",
+        "metadata": {
+          "description": ""
+        }
+      },
+      "DSCScriptName":{
+        "type": "string",
+        "metadata": {
+          "description": ""
+        }
+      },
+      "DSCScriptFunction":{
+        "type": "string",
+        "metadata": {
+          "description": ""
+        }
+      }
+    },
+    "variables": {
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "[parameters('storageAccountName')]",
+            "apiVersion": "2016-01-01",
+            "location": "[resourceGroup().location]",
+            "sku": {
+              "name": "Standard_LRS"
+            },
+            "kind": "Storage",
+            "properties": {}
+        },
+        {
+        "apiVersion": "2016-03-30",
+        "type": "Microsoft.Network/publicIPAddresses",
+        "name": "[parameters('publicIPAddressName')]",
+        "location": "[resourceGroup().location]",
+        "properties": {
+          "publicIPAllocationMethod": "Dynamic",
+          "dnsSettings": {
+            "domainNameLabel": "[parameters('dnsLabelPrefix')]"
+          }
+        }
+      },
+      {
+        "apiVersion": "2016-03-30",
+        "type": "Microsoft.Network/virtualNetworks",
+        "name": "[parameters('virtualNetworkName')]",
+        "location": "[resourceGroup().location]",
+        "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+              "[parameters('addressPrefix')]"
+            ]
+          },
+          "subnets": [
+            {
+              "name": "[parameters('subnetName')]",
+              "properties": {
+                "addressPrefix": "[parameters('subnetPrefix')]"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "apiVersion": "2016-03-30",
+        "type": "Microsoft.Network/networkInterfaces",
+        "name": "[parameters('nicName')]",
+        "location": "[resourceGroup().location]",
+        "dependsOn": [
+          "[resourceId('Microsoft.Network/publicIPAddresses/', parameters('publicIPAddressName'))]",
+          "[resourceId('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]"
+        ],
+        "properties": {
+          "ipConfigurations": [
+            {
+              "name": "ipconfig1",
+              "properties": {
+                "privateIPAllocationMethod": "Dynamic",
+                "publicIPAddress": {
+                  "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddressName'))]"
+                },
+                "subnet": {
+                  "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetName'))]"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "[concat(parameters('vmName'),'/Microsoft.Powershell.DSC')]",
+        "type": "Microsoft.Compute/virtualMachines/extensions",
+        "location": "[resourceGroup().location]",
+        "apiVersion": "2016-03-30",
+        "dependsOn": [
+            "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
+        ],
+        "properties": {
+            "publisher": "Microsoft.Powershell",
+            "type": "DSC",
+            "typeHandlerVersion": "2.70",
+            "autoUpgradeMinorVersion": true,
+            "protectedSettings": {
+                "configurationUrlSasToken": "[parameters('DSCPackageSasToken')]"
+            },
+            "settings": {
+                "configuration": {
+                    "url": "[parameters('DSCPackagePath')]",
+                    "script": "[parameters('DSCScriptName')]",
+                    "function": "[parameters('DSCScriptFunction')]"
+                }
+            }
+          }
+        },
+      {
+        "apiVersion": "2017-03-30",
+        "type": "Microsoft.Compute/virtualMachines",
+        "name": "[parameters('vmName')]",
+        "location": "[resourceGroup().location]",
+        "dependsOn": [
+          "[resourceId('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]",
+          "[resourceId('Microsoft.Network/networkInterfaces/', parameters('nicName'))]"
+        ],
+        "properties": {
+          "hardwareProfile": {
+            "vmSize": "Standard_A2"
+          },
+          "osProfile": {
+            "computerName": "[parameters('vmName')]",
+            "adminUsername": "[parameters('adminUsername')]",
+            "adminPassword": "[parameters('adminPassword')]"
+          },
+          "storageProfile": {
+            "imageReference": {
+              "publisher": "MicrosoftWindowsServer",
+              "offer": "WindowsServer",
+              "sku": "[parameters('windowsOSVersion')]",
+              "version": "latest"
+            },
+            "osDisk": {
+              "createOption": "FromImage"
+            }
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "[resourceId('Microsoft.Network/networkInterfaces',parameters('nicName'))]"
+              }
+            ]
+          },
+          "diagnosticsProfile": {
+            "bootDiagnostics": {
+              "enabled": true,
+              "storageUri": "[reference(resourceId('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))).primaryEndpoints.blob]"
+            }
+          }
+        }
+      }
+    ],
+    "outputs": {
+      "hostname": {
+        "type": "string",
+        "value": "[reference(parameters('publicIPAddressName')).dnsSettings.fqdn]"
+      }
+    }
+  }
