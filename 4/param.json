@@ -54,7 +54,7 @@
             "value": ""
         },
         "DSCPackagePath":{
-            "value": "https://sascriptstraining.blob.core.windows.net/windows-powershell-dsc/MyDsc.ps1.zip"
+            "value": "https://blobiktest.file.core.windows.net/dscscript/MyDsc.ps1"
         },
         "DSCScriptName":{
             "value": "MyDsc.ps1"
@@ -63,7 +63,7 @@
             "value": "IISWebSite"
         },
         "accountName":{
-            "value": "AutomationAcc"
+            "value": "AutomationAccountTest"
         },
         "credentialName":{
             "value": "AutoRunbook"

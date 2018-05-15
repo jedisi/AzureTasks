@@ -1,5 +1,5 @@
 #region DSC Configuration Definitions
-Configuration IISWebSite
+Configuration MyDSC
 {
     param 
     (
