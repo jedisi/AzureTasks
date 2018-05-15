@@ -1,6 +1,6 @@
-$RG = 'RG'
-$RG2 = 'RG2'
-$StorageName = 'sascriptstraining'
+$RG = 'RG11'
+$RG2 = 'RG22'
+$StorageName = 'blobiktesttrain'
 $Location = 'westeurope'
 $DSCConfigPath = 'https://raw.githubusercontent.com/jedisi/AzureTasks/master/4/MyDsc.ps1'
 $TempDSCCOnfigPath = "C:\Users\Aliaksandr_Simanau\Desktop\Azure\Git\AzureTasks\4\MyDsc.ps1"
